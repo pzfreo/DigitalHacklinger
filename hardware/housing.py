@@ -39,8 +39,8 @@ with BuildPart() as housing:
             Box(TO92_W, TO92_D, slot_h, mode=Mode.SUBTRACT)
 
 # ── Export ───────────────────────────────────────────────────────────────────
-housing.part.export_step("housing.step")
-housing.part.export_stl("housing.stl")
+export_step(housing.part, "housing.step")
+export_stl(housing.part, "housing.stl")
 
 try:
     from ocp_vscode import show_all
