@@ -7,10 +7,12 @@ MAGNET_BORE  = 6.5    # bore = magnet + 0.5mm play (slide fit)
 SENSOR_W     = 4.1    # sensor body width (SS495A1 SIP-3, nominal)
 SENSOR_D     = 1.55   # sensor body thickness (SS495A1 SIP-3, nominal)
 SENSOR_FIT   = 0.5    # added to both W and D for slide-in clearance
+POCKET_H     = 6.0    # enclosed-slot height above disc (cutout starts above this)
 OUTER_WALL   = 2.0    # outer wall of sensor pocket
 DISC_H       = 1.0    # reference face disc thickness
 TOTAL_H      = 15.0   # total housing height
 FILLET_R     = 2.0    # bottom outer edge fillet
+LEAD_EXIT_W  = 8.0    # tangential width of the radial cut-through above each slot
 
 TUBE_WALLS   = (1.0, 2.0)   # variants to emit — sensor-to-magnet wall thickness
 
@@ -43,6 +45,20 @@ def build(tube_wall: float):
             cy    = pocket_r * sin(ang_r)
             with Locations(Location((cx, cy, slot_cz), (0, 0, 1), ang + 90)):
                 Box(slot_w, slot_d, slot_h, mode=Mode.SUBTRACT)
+
+        # Lead exit — open the outer wall radially above the sensor body so
+        # solder joints / connectors clear during insertion and afterwards.
+        exit_z_start = DISC_H + POCKET_H
+        exit_h       = TOTAL_H - exit_z_start
+        exit_cz      = (exit_z_start + TOTAL_H) / 2
+        exit_depth   = 20.0   # big enough to cut clean through any housing diameter
+        for i in range(3):
+            ang   = i * 120.0
+            ang_r = radians(ang)
+            cx    = (pocket_r + exit_depth / 2) * cos(ang_r)
+            cy    = (pocket_r + exit_depth / 2) * sin(ang_r)
+            with Locations(Location((cx, cy, exit_cz), (0, 0, 1), ang + 90)):
+                Box(LEAD_EXIT_W, exit_depth, exit_h, mode=Mode.SUBTRACT)
 
         # Soften the bottom (measurement-face) outer edge.
         fillet(housing.faces().sort_by(Axis.Z)[0].edges(), radius=FILLET_R)
