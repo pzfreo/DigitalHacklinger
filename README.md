@@ -9,7 +9,7 @@ A steel ball bearing is placed on the reverse face of the material. A neodymium 
 ## Hardware
 
 - Seeed XIAO ESP32S3
-- ADS122C04 24-bit 4-channel I2C ADC
+- ADC chip — not finalised (prototyping with the SparkX ADS1219 breakout)
 - SS495A1 linear Hall effect sensors
 - N52 neodymium magnet
 - 3–4mm steel ball bearing
