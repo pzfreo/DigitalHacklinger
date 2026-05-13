@@ -34,7 +34,7 @@ def build(tube_wall: float):
         with Locations((0, 0, slot_cz)):
             Cylinder(radius=MAGNET_BORE / 2, height=slot_h, mode=Mode.SUBTRACT)
 
-        # Three sensor slots at 120° — sensors drop in flat-face-inward, leads exit top.
+        # Three sensor slots at 120° — sensors drop in marked-face-inward, leads exit top.
         # Rotating by ang+90° aligns slot depth radially, width tangentially.
         for i in range(3):
             ang   = i * 120.0
