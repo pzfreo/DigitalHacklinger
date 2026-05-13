@@ -3,7 +3,7 @@ from math import cos, sin, radians
 
 # ── Fixed parameters ────────────────────────────────────────────────────────
 MAGNET_DIA   = 6.0    # nominal magnet OD
-MAGNET_BORE  = 6.1    # bore = magnet + 0.1mm play
+MAGNET_BORE  = 6.5    # bore = magnet + 0.5mm play (slide fit)
 SENSOR_W     = 4.1    # sensor body width (SS495A1 SIP-3, nominal)
 SENSOR_D     = 1.55   # sensor body thickness (SS495A1 SIP-3, nominal)
 SENSOR_FIT   = 0.5    # added to both W and D for slide-in clearance
